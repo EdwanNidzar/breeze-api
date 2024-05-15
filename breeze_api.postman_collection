@@ -1,0 +1,301 @@
+{
+	"info": {
+		"_postman_id": "ecd6dae7-2aea-4c52-a3dc-f1bca0ae8033",
+		"name": "example-app",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "29683199"
+	},
+	"item": [
+		{
+			"name": "post",
+			"item": [
+				{
+					"name": "get a post",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "3|3RNdclUcopDPb7JwgKitLfn7VN7OQS5PSLCs1DmU73653c58"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://127.0.0.1:8000/api/posts"
+					},
+					"response": []
+				},
+				{
+					"name": "insert posts",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "3|3RNdclUcopDPb7JwgKitLfn7VN7OQS5PSLCs1DmU73653c58"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/nidza/Downloads/gerinda.jpeg"
+								},
+								{
+									"key": "title",
+									"value": "photo",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "ini photo partai gerinda",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://127.0.0.1:8000/api/posts"
+					},
+					"response": []
+				},
+				{
+					"name": "get a post",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "3|3RNdclUcopDPb7JwgKitLfn7VN7OQS5PSLCs1DmU73653c58"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://127.0.0.1:8000/api/posts/1"
+					},
+					"response": []
+				},
+				{
+					"name": "update posts",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "3|3RNdclUcopDPb7JwgKitLfn7VN7OQS5PSLCs1DmU73653c58"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/nidza/Downloads/cropped-logo-uniska-ok-300x300.png"
+								},
+								{
+									"key": "title",
+									"value": "photoo",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "ini photo unsika",
+									"type": "text"
+								},
+								{
+									"key": "_method",
+									"value": "PATCH",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://127.0.0.1:8000/api/posts/3"
+					},
+					"response": []
+				},
+				{
+					"name": "get a post Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "3|3RNdclUcopDPb7JwgKitLfn7VN7OQS5PSLCs1DmU73653c58"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": "http://127.0.0.1:8000/api/posts/2"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "Register",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.sendRequest({\r",
+									"    url: 'http://127.0.0.1:8000/sanctum/csrf-cookie',\r",
+									"    method: 'GET'\r",
+									"}, function (error, response, { cookies }) {\r",
+									"    if (!error) {\r",
+									"        pm.environment.set('xsrf-token', cookies.get('XSRF-TOKEN'))\r",
+									"    }\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-XSRF-TOKEN",
+								"value": "{{xsrf-token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "edwan new",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "nidzar@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password123",
+									"type": "text"
+								},
+								{
+									"key": "password_confirmation",
+									"value": "password123",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://127.0.0.1:8000/register"
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.sendRequest({\r",
+									"    url: 'http://127.0.0.1:8000/sanctum/csrf-cookie',\r",
+									"    method: 'GET'\r",
+									"}, function (error, response, { cookies }) {\r",
+									"    if (!error) {\r",
+									"        pm.environment.set('xsrf-token', cookies.get('XSRF-TOKEN'))\r",
+									"    }\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-XSRF-TOKEN",
+								"value": "{{xsrf-token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": "http://127.0.0.1:8000/logout"
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.sendRequest({\r",
+									"    url: 'http://127.0.0.1:8000/sanctum/csrf-cookie',\r",
+									"    method: 'GET'\r",
+									"}, function (error, response, { cookies }) {\r",
+									"    if (!error) {\r",
+									"        pm.environment.set('xsrf-token', cookies.get('XSRF-TOKEN'))\r",
+									"    }\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-XSRF-TOKEN",
+								"value": "{{xsrf-token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "edwan@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password123",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://127.0.0.1:8000/login"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
